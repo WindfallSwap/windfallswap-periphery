@@ -1,0 +1,47 @@
+{
+  "name": "@windfallswap/periphery",
+  "version": "1.0.0-beta",
+  "description": "🎚 Peripheral smart contracts for interacting with Windfall Swap",
+  "engines": {
+    "node": ">=10"
+  },
+  "homepage": "https://windfallswap.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/WindfallSwap/windfallswap-periphery"
+  },
+  "files": [
+    "build",
+    "contracts"
+  ],
+  "dependencies": {
+    "@truffle/hdwallet-provider": "^1.2.0",
+    "@windfallswap/core": "^1.0.0",
+    "@windfallswap/lib": "^1.0.0-alpha.1"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.2.6",
+    "@types/mocha": "^5.2.7",
+    "chai": "^4.2.0",
+    "ethereum-waffle": "^2.4.1",
+    "ethereumjs-util": "^6.2.0",
+    "mocha": "^6.2.2",
+    "ncp": "^2.0.0",
+    "prettier": "^1.19.1",
+    "rimraf": "^3.0.0",
+    "solc": "0.6.6",
+    "ts-node": "^8.5.4",
+    "typescript": "^3.7.3"
+  },
+  "scripts": {
+    "lint": "yarn prettier ./test/*.ts --check",
+    "lint:fix": "yarn prettier ./test/*.ts --write",
+    "clean": "rimraf ./build/",
+    "precompile": "yarn clean",
+    "compile": "waffle .waffle.json",
+    "pretest": "yarn compile",
+    "test": "mocha",
+    "prepublishOnly": "yarn test && truffle compile && move /Y .\\build\\contracts\\* .\\build && rmdir .\\build\\contracts"
+  },
+  "license": "GPL-3.0-or-later"
+}
